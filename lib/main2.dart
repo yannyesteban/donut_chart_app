@@ -8,53 +8,33 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Gráfico Donut Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: const DonutChartExample(),
     );
   }
 }
 
 class DonutChartExample extends StatelessWidget {
-  const DonutChartExample({Key? key}) : super(key: key);
+  const DonutChartExample({super.key});
 
   @override
   Widget build(BuildContext context) {
     // Datos de ejemplo para nuestro gráfico usando la estructura PieData
     final chartData = [
-      PieData(
-        title: 'Flutter',
-        percent: 40,
-        color: Colors.blue,
-      ),
-      PieData(
-        title: 'React Native',
-        percent: 25,
-        color: Colors.green,
-      ),
-      PieData(
-        title: 'Native Android',
-        percent: 20,
-        color: Colors.red,
-      ),
-      PieData(
-        title: 'Native iOS',
-        percent: 15,
-        color: Colors.orange,
-      ),
+      PieData(title: 'Flutter', percent: 40, color: Colors.blue),
+      PieData(title: 'React Native', percent: 25, color: Colors.green),
+      PieData(title: 'Native Android', percent: 20, color: Colors.red),
+      PieData(title: 'Native iOS', percent: 15, color: Colors.orange),
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Gráfico Donut Personalizado'),
-      ),
+      appBar: AppBar(title: const Text('Gráfico Donut Personalizado')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -78,26 +58,23 @@ class DonutChartExample extends StatelessWidget {
             const SizedBox(height: 40),
             // Leyenda del gráfico
             Column(
-              children: chartData.map((item) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        width: 20,
-                        height: 20,
-                        color: item.color,
+              children:
+                  chartData.map((item) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(width: 20, height: 20, color: item.color),
+                          const SizedBox(width: 8),
+                          Text(
+                            "${item.title} (${item.percent}%)",
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 8),
-                      Text(
-                        "${item.title} (${item.percent}%)",
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                );
-              }).toList(),
+                    );
+                  }).toList(),
             ),
           ],
         ),
