@@ -1,13 +1,8 @@
-// main.dart - Ejemplo de uso con Provider para gestión de estado
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'donut_chart_config.dart';
 import 'custom_donut_chart.dart';
 import 'api_service.dart';
-
-void main() {
-  runApp(const MyApp());
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -55,7 +50,7 @@ class ChartDataProvider extends ChangeNotifier {
       // chartData = await apiService.fetchChartData();
       chartData = [
         PieData(
-          title: 'Trabajo..',
+          title: 'Trabajo',
           value: 35,
           color: Colors.blue.shade400,
           extraData: {
@@ -117,7 +112,7 @@ class ChartDataProvider extends ChangeNotifier {
 }
 
 class ChartDashboardScreen extends StatelessWidget {
-  const ChartDashboardScreen({super.key});
+  const ChartDashboardScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

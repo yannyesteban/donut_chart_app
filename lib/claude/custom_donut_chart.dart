@@ -6,7 +6,7 @@ import 'donut_chart_config.dart';
 class CustomDonutChart extends StatefulWidget {
   final DonutChartConfig config;
 
-  const CustomDonutChart({required this.config, super.key});
+  const CustomDonutChart({required this.config, Key? key}) : super(key: key);
 
   @override
   State<CustomDonutChart> createState() => _CustomDonutChartState();
