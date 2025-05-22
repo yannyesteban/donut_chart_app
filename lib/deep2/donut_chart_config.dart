@@ -48,6 +48,7 @@ class DonutChartConfig {
   final String Function(PieData) legendText;
   final bool showPercentages;
   final bool showLegend;
+  final int? selectedIndex; // Índice del segmento seleccionado
 
   DonutChartConfig({
     required this.data,
@@ -65,6 +66,7 @@ class DonutChartConfig {
     this.legendText = _defaultFormatter,
     this.showPercentages = true,
     this.showLegend = true,
+    this.selectedIndex,
   }) : assert(data.isNotEmpty, 'Data list cannot be empty'),
        assert(spaceRadius > 0, 'Hole diameter must be greater than 0'),
        assert(strokeWidth > 0, 'Stroke width must be greater than 0'),

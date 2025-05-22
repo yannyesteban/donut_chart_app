@@ -18,6 +18,108 @@ class DonutPainter extends CustomPainter {
 
     // Dibujar los segmentos
     double startAngle = -pi / 2;
+    final double selectedOffset = 10;
+    final selectedIndex = 0;
+    for (int i = 0; i < config.data.length; i++) {
+      final segment = config.data[i];
+      final sweepAngle = 2 * pi * (segment.value / total) * progress;
+      final paint =
+          Paint()
+            ..color = segment.color
+            ..style = PaintingStyle.fill;
+
+      // Calcular desplazamiento si es el segmento seleccionado
+      final isSelected = i == selectedIndex;
+      final offset = isSelected ? selectedOffset : 0.0;
+      final offsetAngle = startAngle + sweepAngle / 2;
+      final offsetCenter = Offset(
+        center.dx + offset * cos(offsetAngle),
+        center.dy + offset * sin(offsetAngle),
+      );
+
+      // Dibujar el segmento de la dona con posible desplazamiento
+      final path =
+          Path()
+            ..moveTo(offsetCenter.dx, offsetCenter.dy)
+            ..arcTo(
+              Rect.fromCircle(center: offsetCenter, radius: radius),
+              startAngle,
+              sweepAngle,
+              false,
+            )
+            ..lineTo(offsetCenter.dx, offsetCenter.dy)
+            ..close();
+
+      final holePath =
+          Path()..addOval(
+            Rect.fromCircle(center: offsetCenter, radius: holeRadius),
+          );
+
+      final donutPath = Path.combine(PathOperation.difference, path, holePath);
+
+      canvas.drawPath(donutPath, paint);
+
+      // Texto en los segmentos (opcional)
+      if (progress > 0.8) {
+        final middleAngle = startAngle + sweepAngle / 2;
+        final textRadius = (radius + holeRadius) / 2;
+        final textX = offsetCenter.dx + textRadius * cos(middleAngle);
+        final textY = offsetCenter.dy + textRadius * sin(middleAngle);
+
+        final textPainter = TextPainter(
+          text: TextSpan(
+            text: '${(segment.value / total * 100).toStringAsFixed(1)}%',
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          textDirection: TextDirection.ltr,
+        )..layout();
+
+        textPainter.paint(
+          canvas,
+          Offset(textX - textPainter.width / 2, textY - textPainter.height / 2),
+        );
+      }
+
+      // Bordes de los segmentos
+      final borderPaint =
+          Paint()
+            ..color = config.strokeColor
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = config.strokeWidth;
+
+      canvas.drawArc(
+        Rect.fromCircle(center: offsetCenter, radius: radius),
+        startAngle,
+        sweepAngle,
+        false,
+        borderPaint,
+      );
+
+      startAngle += sweepAngle;
+    }
+
+    // Borde interior
+    final innerBorderPaint =
+        Paint()
+          ..color = config.strokeColor
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = config.strokeWidth;
+
+    canvas.drawCircle(center, holeRadius, innerBorderPaint);
+  }
+
+  void paint1(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    final total = config.data.fold(0.0, (sum, segment) => sum + segment.value);
+    final radius = size.width / 2;
+    final holeRadius = config.spaceRadius / 2;
+
+    // Dibujar los segmentos
+    double startAngle = -pi / 2;
 
     for (var segment in config.data) {
       final sweepAngle = 2 * pi * (segment.value / total) * progress;
@@ -143,6 +245,7 @@ class InteractiveDonutChart extends StatefulWidget {
 
 class _InteractiveDonutChartState extends State<InteractiveDonutChart> {
   DonutPainter? _painter;
+  int? _selectedIndex;
 
   @override
   Widget build(BuildContext context) {

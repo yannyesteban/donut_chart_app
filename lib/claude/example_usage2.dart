@@ -4,7 +4,7 @@ import 'donut_chart_config.dart';
 import 'custom_donut_chart.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 }
 
 class DonutChartExample extends StatelessWidget {
-  const DonutChartExample({Key? key}) : super(key: key);
+  const DonutChartExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class DonutChartExample extends StatelessWidget {
       legendFormat: (segment) {
         final total = segments.fold(0.0, (sum, s) => sum + s.value);
         final percentage = (segment.value / total * 100).toStringAsFixed(1);
-        return '${segment.title} (${percentage}%)';
+        return '${segment.title} ($percentage%)';
       },
     );
 

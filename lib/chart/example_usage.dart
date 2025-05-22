@@ -1,12 +1,11 @@
 // example_usage.dart
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'donut_chart_config.dart';
 import 'custom_donut_chart.dart';
 
 class DonutChartExample extends StatefulWidget {
-  const DonutChartExample({Key? key}) : super(key: key);
+  const DonutChartExample({super.key});
 
   @override
   State<DonutChartExample> createState() => _DonutChartExampleState();

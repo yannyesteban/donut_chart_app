@@ -6,7 +6,7 @@ import 'donut_chart_config.dart';
 import 'custom_donut_chart.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 }
 
 class DonutChartExample extends StatefulWidget {
-  const DonutChartExample({Key? key}) : super(key: key);
+  const DonutChartExample({super.key});
 
   @override
   State<DonutChartExample> createState() => _DonutChartExampleState();

@@ -6,7 +6,7 @@ import 'donut_chart_config.dart';
 class CustomDonutChart extends StatefulWidget {
   final DonutChartConfig config;
 
-  const CustomDonutChart({required this.config, Key? key}) : super(key: key);
+  const CustomDonutChart({required this.config, super.key});
 
   @override
   State<CustomDonutChart> createState() => _CustomDonutChartState();
@@ -260,7 +260,7 @@ class _CustomDonutChartState extends State<CustomDonutChart> {
     final total = widget.config.data.fold(0.0, (sum, s) => sum + s.value);
     final percentage = (segment.value / total * 100).toStringAsFixed(1);
 
-    return '${segment.title} (${percentage}%)';
+    return '${segment.title} ($percentage%)';
   }
 }
 

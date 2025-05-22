@@ -5,7 +5,7 @@ import 'custom_donut_chart.dart';
 import 'api_service.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +112,7 @@ class ChartDataProvider extends ChangeNotifier {
 }
 
 class ChartDashboardScreen extends StatelessWidget {
-  const ChartDashboardScreen({Key? key}) : super(key: key);
+  const ChartDashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
